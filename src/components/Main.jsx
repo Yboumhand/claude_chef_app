@@ -7,21 +7,14 @@ export default function Main() {
     "Tomatoes",
   ]);
 
-  function handleSubmit(event) {
-    event.preventDefault(); // don't reload the page
-    const formData = new FormData(event.currentTarget);
+  function addIngredient(formData) {
     const newIngredient = formData.get("ingredient");
     setIngredients((prevIngredients) => [...prevIngredients, newIngredient]);
   }
 
   return (
     <main className="main">
-      <form
-        onSubmit={handleSubmit}
-        action=""
-        method="get"
-        className="ingredient-form"
-      >
+      <form action={addIngredient} className="ingredient-form">
         <input
           className="ingredient-input"
           aria-label="Ingredient"

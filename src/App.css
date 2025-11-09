@@ -1,3 +1,5 @@
+/* ======= Chef Claude App Styles ========= 
+
 * {
   box-sizing: border-box;
 }
@@ -67,5 +69,39 @@ body {
 .add-btn:hover {
   background-color: #333;
   border-color: #333;
+  cursor: pointer;
+} */
+
+/* 
+==================
+CSS CHALLENGE STYLES
+==================
+*/
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #1c1917;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pad-container {
+  display: grid;
+  grid-template-columns: repeat(4, 200px);
+  grid-template-rows: repeat(2, 200px);
+  gap: 10px;
+}
+
+button {
+  height: 200px;
+  width: 200px;
+  border: 3px solid white;
+  border-radius: 5px;
   cursor: pointer;
 }
