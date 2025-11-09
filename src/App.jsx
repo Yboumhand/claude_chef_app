@@ -1,21 +1,30 @@
 // import Header from "./components/Header";
 // import Main from "./components/Main";
 // import chefClaudeLogo from "./images/chef-claude-icon.png";
+
 import "./App.css";
 import React from "react";
 import padsData from "./pads";
+import Pad from "./components/Pad";
 
-export default function App(props) {
+export default function App({ darkMode }) {
   const [pads, setPads] = React.useState(padsData);
-  const btnElements = pads.map((pad) => <button key={pad.id}></button>);
-  const isDarkMode = props.darkMode;
+
+  function toggle() {
+    console.log(`button clicked!`);
+  }
+
   const styles = {
-    backgroundColor: isDarkMode ? "#222" : "#ccc",
+    backgroundColor: darkMode ? "#222" : "#ccc",
   };
 
   return (
     <div className="pad-container">
-      <main style={styles}>{btnElements}</main>
+      <main style={styles}>
+        {pads.map((pad) => (
+          <Pad key={pad.id} color={pad.color} on={pad.on} toggle={toggle} />
+        ))}
+      </main>
     </div>
   );
 }
