@@ -5,7 +5,7 @@ export default function Header(props) {
     <header>
       <img
         className="chef-claude-logo"
-        src={props.img}
+        src={props.chefClaudeLogo}
         alt="Chef Claude logo"
       />
       <p className="header-title">{props.title}</p>
