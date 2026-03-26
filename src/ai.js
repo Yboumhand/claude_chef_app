@@ -1,18 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
 
-// 🚨👉 ALERT: Read message below! You've been warned! 👈🚨
-// If you're following along on your local machine instead of
-// here on Scrimba, make sure you don't commit your API keys
-// to any repositories and don't deploy your project anywhere
-// live online. Otherwise, anyone could inspect your source
-// and find your API keys/tokens. If you want to deploy
-// this project, you'll need to create a backend of some kind,a
-// either your own or using some serverless architecture where
-// your API calls can be made. Doing so will keep your
-// API keys private.
-
-// Make sure you set an environment variable in Scrimba
-
 const ai = new GoogleGenAI({
   apiKey: import.meta.env.VITE_GEMINI_API_KEY,
 });
@@ -48,10 +35,11 @@ export async function getRecipeFromGemini(ingredientsArr) {
       config: {
         // 2. The System Instruction (persona/rules) must be set here in the config
         systemInstruction: SYSTEM_PROMPT,
-        maxOutputTokens: 1024,
-        temperature: 0.7,
+        maxOutputTokens: 2048, // Increased for Markdown safety
+        temperature: 0.5, // More focused output
       },
     });
+    console.log("Finish Reason:", result.candidates[0].finishReason);
     return response.text;
   } catch (err) {
     console.error("Gemini API Error:", err.message);
