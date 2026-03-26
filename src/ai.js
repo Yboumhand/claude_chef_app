@@ -39,7 +39,6 @@ export async function getRecipeFromGemini(ingredientsArr) {
         temperature: 0.5, // More focused output
       },
     });
-    console.log("Finish Reason:", result.candidates[0].finishReason);
     return response.text;
   } catch (err) {
     console.error("Gemini API Error:", err.message);
