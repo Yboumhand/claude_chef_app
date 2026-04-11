@@ -5,8 +5,9 @@ import { getRecipeFromGemini } from "../ai"; // import gemini model
 
 export default function Main() {
   const [ingredients, setIngredients] = React.useState([]);
-
   const [recipe, setRecipe] = React.useState("");
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [error, setError] = React.useState("");
 
   const ingredientsListItems = ingredients.map((ingredient) => (
     <li key={ingredient}>{ingredient}</li>
@@ -15,13 +16,25 @@ export default function Main() {
   // we've add the async keyword here plus the await keyword below, because we're returnning a promise
 
   async function getRecipe() {
-    const recipeMarkdown = await getRecipeFromGemini(ingredients);
-    setRecipe(recipeMarkdown);
+    setIsLoading(true);
+    setRecipe("");
+    setError("");
+    try {
+      const recipeMarkdown = await getRecipeFromGemini(ingredients);
+      setRecipe(recipeMarkdown);
+    } catch (err) {
+      setError("Failed to generate recipe. Please try again.");
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   function addIngredient(formData) {
-    const newIngredient = formData.get("ingredient");
-    setIngredients((prevIngredients) => [...prevIngredients, newIngredient]);
+    const newIngredient = formData.get("ingredient").trim();
+    if (newIngredient) {
+      setIngredients((prevIngredients) => [...prevIngredients, newIngredient]);
+    }
   }
 
   return (
@@ -41,6 +54,8 @@ export default function Main() {
           ingredients={ingredients}
           getRecipe={getRecipe}
           ingredientsListItems={ingredientsListItems}
+          isLoading={isLoading}
+          error={error}
         />
       )}
       {recipe && <ClaudeRecipe recipe={recipe} />}
