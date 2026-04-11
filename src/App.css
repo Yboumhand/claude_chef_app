@@ -114,6 +114,17 @@ ul.ingredients-list > li {
   cursor: pointer;
 }
 
+.get-recipe-container button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: #dc2626;
+  font-size: 0.875rem;
+  margin-top: 8px;
+}
+
 .suggested-recipe-container {
   color: #475467;
   line-height: 28px;
